@@ -1,0 +1,204 @@
+
+body {
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.scene {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: radial-gradient(ellipse at center, #0d0d1a 0%, #000 100%);
+}
+
+.cord {
+  width: 4px;
+  height: 80px;
+  background: #444;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.lamp {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: top center;
+  animation: swing 4s infinite ease-in-out;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.lamp-head {
+  width: 80px;
+  height: 40px;
+  background: gray;
+  border-radius: 0 0 50px 50px;
+  margin: 0 auto;
+  box-shadow: none;
+  transition: all 0.5s ease;
+}
+
+.light-cone {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
+  height: 700px;
+  background: radial-gradient(ellipse at center, rgba(0,255,255,0.25), transparent 60%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  filter: blur(20px);
+  opacity: 0;
+  z-index: 1;
+  transform-origin: top center;
+  animation: swing 4s infinite ease-in-out;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.lamp.on .lamp-head {
+  background: #00f0ff;
+  box-shadow: 0 0 30px cyan;
+}
+
+.lamp.on .light-cone {
+  opacity: 1;
+}
+
+.text {
+  position: absolute;
+  top: 55%;
+  left: 52.5%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, #0d0d1a -30%, #000 600%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-size: 3rem;
+  opacity:0.25 ;
+  transition: opacity 0.2s ease;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.switch {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  background-color: #333;
+  border-radius: 34px;
+  transition: .4s;
+}
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #00f0ff;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+@keyframes swing {
+  0% { transform: translateX(-50%) rotate(18deg); }
+  50% { transform: translateX(-50%) rotate(-18deg); }
+  100% { transform: translateX(-50%) rotate(3deg); }
+}
+
+.start-message {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ccc;
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  z-index: 6;
+  transition: opacity 1s ease;
+}
+
+.start-message.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+/*estrellas */
+#stars-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Corazones */
+#hearts-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 1.5rem;
+  animation: floatUp 3s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(1.5);
+    opacity: 0;
+  }
+}
